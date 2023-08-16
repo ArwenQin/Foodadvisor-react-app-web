@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import TuitsItem from "./tuits-item";
+import RatingItem from "./tuits-item";
 import {findTuitsThunk} from "../services/tuits-thunks";
 
 
-const TuitsList = () => {
+const RatingsList = () => {
   const { tuits, loading } = useSelector(state => state.tuits)
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,11 +22,11 @@ const TuitsList = () => {
 
         {
           tuits.map(tuit =>
-              <TuitsItem
+              <RatingItem
                   key={tuit._id} tuit={tuit}/> )
         }
       </ul>
   );
 };
-export default TuitsList;
+export default RatingsList;
 

@@ -2,7 +2,8 @@ import axios from 'axios';
 const API_BASE = process.env.REACT_APP_API_BASE;
 const TUITS_API = `${API_BASE}/tuits`;
 
-export const createTuit = async (tuit) => { const response = await axios.post(TUITS_API, tuit)
+export const createTuit = async (tuit) => {
+  const response = await axios.post(TUITS_API, tuit)
   return response.data;
 }
 export const findTuits = async () => {
@@ -20,9 +21,14 @@ export const deleteTuit = async (tid) => {
 
 export const updateTuit = async (tuit) => {
   const response = await axios
-  .put(`${TUITS_API}/${tuit._id}`, tuit);
+    .put(`${TUITS_API}/${tuit._id}`, tuit);
   return tuit;
 }
+export const searchTuits = async (query) => {
+  const response = await axios.get(`${TUITS_API}/search`, { params: { q: query } });
+  return response.data;
+}
+
 
 
 
