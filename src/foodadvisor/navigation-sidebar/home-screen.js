@@ -1,5 +1,5 @@
 import React from "react";
-import TuitsList from "../tuits-list";
+import RatingsList from "../tuits-list";
 
 import "./index.css";
 import WhatsHappening from "./whats-happening";
@@ -12,7 +12,7 @@ function HomeScreen() {
 
   <h4>Home</h4>
     <WhatsHappening/>
-  <TuitsList/>
+  <RatingsList/>
   </>)
 }
 export default HomeScreen;
