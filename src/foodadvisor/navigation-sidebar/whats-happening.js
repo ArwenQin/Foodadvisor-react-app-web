@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { rateRestaurantThunk, searchTuitsThunk } from "../services/tuits-thunks"; 
+import { rateRestaurantThunk, searchTuitsThunk } from "../services/tuits-thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { FaSearch } from "react-icons/fa";
 
 const WhatsHappening = () => {
   const [whatsHappening, setWhatsHappening] = useState({});
@@ -42,7 +43,7 @@ const WhatsHappening = () => {
       comment: ratingData.comment,
       restaurantType: restaurant.restaurantType
     }
-    
+
     // Use the new thunk here
     dispatch(rateRestaurantThunk(newRating));
 
@@ -55,16 +56,32 @@ const WhatsHappening = () => {
   }
 
   return (
-    <div className="row">
+    <div className="row whatsHappening-container">
+    <div className="search-section" style={{ display: 'flex', alignItems: 'center' }}>
       <input
         type="text"
         value={searchTerm}
         placeholder="Search for a restaurant"
         onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ marginRight: '10px' }} 
       />
-      <button onClick={handleSearch}>Search</button>
+      <button 
+        style={{
+            backgroundColor: "#FFA500",  
+            borderRadius: "20px",        
+            padding: "5px 15px",         
+            border: "none",              
+            display: "flex",             
+            alignItems: "center",        
+            cursor: "pointer"            
+        }}
+        onClick={handleSearch}
+      >
+        <FaSearch style={{ marginRight: "5px" }} /> Search
+      </button>
+    </div>
 
-      <ul>
+      <ul className="restaurant-list">
         {searchTerm && !searchResults.length ? (
           <li>No restaurants found</li>
         ) : (
@@ -72,7 +89,7 @@ const WhatsHappening = () => {
             <li key={restaurant._id}>
               {restaurant.name} ({restaurant.restaurantType})
 
-              {currentUser.type === "customer" && (  // Check if the user type is "customer"
+              {currentUser.type === "customer" && (
                 <div>
                   <input
                     type="number"
@@ -114,6 +131,7 @@ const WhatsHappening = () => {
       <div className="col-12"><hr /></div>
     </div>
   );
+
 }
 
 export default WhatsHappening;
