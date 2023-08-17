@@ -5,13 +5,13 @@ import { registerThunk } from "../services/auth-thunks";
 function RegisterScreen() {
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
+  let [type, setType] = useState("customer");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleRegister = async () => {
     try {
-      await dispatch(registerThunk({ username, password }));
-
+      await dispatch(registerThunk({ username, password, type }));
 
     } catch (e) {
       alert(e);
@@ -33,7 +33,21 @@ function RegisterScreen() {
           <input className="form-control" type="password" value={password}
                  onChange={(event) => setPassword(event.target.value)}/>
         </div>
-        <button className="btn btn-primary mt-2"
+
+        <div className="mt-2">
+          <label htmlFor="select-one-type">
+            Select User Type
+          </label>
+          <br/>
+          <select id="select-one-type" type="text"  onChange={(event) => setType(event.target.value)}>
+            <option value="customer">Customer</option>
+            <option value="owner">Owner</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+
+        <p></p>
+        <button className="btn  mt-2" style={ { backgroundColor: "orange",color: "white",fontWeight: 'bold' }}
                 onClick={handleRegister}>
           Register
         </button>

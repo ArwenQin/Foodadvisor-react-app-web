@@ -1,12 +1,22 @@
 import React, { useState } from "react";
-import { createTuitThunk, searchTuitsThunk } from "../services/tuits-thunks";
-import { useDispatch } from "react-redux";
+import { rateRestaurantThunk, searchTuitsThunk } from "../services/tuits-thunks"; 
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 const WhatsHappening = () => {
   const [whatsHappening, setWhatsHappening] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  if (!currentUser) {
+    navigate("/login");
+    return null;
+  }
 
   const handleSearch = async () => {
     try {
@@ -25,12 +35,16 @@ const WhatsHappening = () => {
 
     const ratingData = whatsHappening[restaurant._id] || {};
     const newRating = {
+      userId: currentUser._id,
+      restaurantId: restaurant._id,
       name: restaurant.name,
       rating: ratingData.rating,
       comment: ratingData.comment,
       restaurantType: restaurant.restaurantType
     }
-    dispatch(createTuitThunk(newRating));
+    
+    // Use the new thunk here
+    dispatch(rateRestaurantThunk(newRating));
 
     // Clear the respective rating and comment
     setWhatsHappening(prev => {
@@ -68,9 +82,9 @@ const WhatsHappening = () => {
                   className="form-control border-0 mt-2"
                   onChange={(event) => setWhatsHappening({
                     ...whatsHappening,
-                    [restaurant._id]: { 
+                    [restaurant._id]: {
                       ...whatsHappening[restaurant._id],
-                      rating: event.target.value 
+                      rating: event.target.value
                     }
                   })}
                 />
@@ -80,9 +94,9 @@ const WhatsHappening = () => {
                   className="form-control border-0 mt-2"
                   onChange={(event) => setWhatsHappening({
                     ...whatsHappening,
-                    [restaurant._id]: { 
+                    [restaurant._id]: {
                       ...whatsHappening[restaurant._id],
-                      comment: event.target.value 
+                      comment: event.target.value
                     }
                   })}>
                 </textarea>

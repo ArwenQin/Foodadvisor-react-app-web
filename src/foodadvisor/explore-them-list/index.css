@@ -1,0 +1,14 @@
+.wd-center-image {
+  position: relative;
+  right: 20%;
+}
+
+.wd-z-index{
+  z-index: 10;
+}
+
+.wd-delete-icon{
+  position: absolute;
+  left:95%;
+
+}

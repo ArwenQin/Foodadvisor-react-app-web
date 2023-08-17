@@ -5,6 +5,7 @@ import { loginThunk } from "../services/auth-thunks";
 function LoginScreen() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
@@ -34,9 +35,12 @@ function LoginScreen() {
           <input className="form-control" type="password" value={password}
                  onChange={(event) => setPassword(event.target.value)}/>
         </div>
-        <button className="btn btn-primary mt-2"
+
+
+
+        <button className="btn  mt-2" style={ { backgroundColor: "orange",color: "white",fontWeight: 'bold' }}
                 onClick={handleLogin}>
-          Login
+          Let's Eat!
         </button>
       </div>
   );
