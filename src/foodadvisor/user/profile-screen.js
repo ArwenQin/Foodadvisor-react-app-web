@@ -4,18 +4,19 @@ import { useNavigate } from "react-router";
 import { profileThunk, logoutThunk, updateUserThunk }
   from "../services/auth-thunks";
 function ProfileScreen() {
- const { currentUser } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
-  const [ profile, setProfile ] = useState(currentUser);
+  const [profile, setProfile] = useState(currentUser);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const save = async () => { try {
-    await dispatch(updateUserThunk(profile));
+  const save = async () => {
+    try {
+      await dispatch(updateUserThunk(profile));
 
-  } catch (e) {
-    alert(e);
-  }
+    } catch (e) {
+      alert(e);
+    }
   };
 
   useEffect(() => {
@@ -31,38 +32,55 @@ function ProfileScreen() {
   }, [dispatch]);
 
 
-  return ( <div>
+  return (
+    <div>
       <h1>Profile Screen</h1>
-      {profile && (<div>
-            <div>
-              <label>First Name</label>
-              <input type="text" value={profile.firstName}
-                     onChange={(event) => {
-                       const newProfile = {
-                         ...profile, firstName: event.target.value,
-                       };
-                       setProfile(newProfile);
-                     }}/>
-            </div>
-            <div>
-              <label>Last Name</label>
-              <input type="text" value={profile.lastName}
-                     onChange={(event) => {
-                       const newProfile = {
-                         ...profile, lastName: event.target.value,
-                       };
-                       setProfile(newProfile);
-                     }}/>
-            </div></div>
+      {profile && (
+        <div>
+          <div>
+            <label>First Name</label>
+            <input
+              type="text"
+              value={profile.firstName}
+              onChange={(event) => {
+                const newProfile = {
+                  ...profile,
+                  firstName: event.target.value,
+                };
+                setProfile(newProfile);
+              }}
+            />
+          </div>
+          <div>
+            <label>Last Name</label>
+            <input
+              type="text"
+              value={profile.lastName}
+              onChange={(event) => {
+                const newProfile = {
+                  ...profile,
+                  lastName: event.target.value,
+                };
+                setProfile(newProfile);
+              }}
+            />
+          </div>
+          <div>
+            <label>User Type: </label>
+            <span> {profile.type}</span>
+          </div>
+        </div>
       )}
       <button
-          onClick={() => {
-            dispatch(logoutThunk());
-            navigate("../login");
-          }}>                   Logout</button>
-      <button onClick={save}>Save  </button>
-
-    </div>)
+        onClick={() => {
+          dispatch(logoutThunk());
+          navigate("../login");
+        }}>
+        Logout
+      </button>
+      <button onClick={save}>Save</button>
+    </div>
+  );
 }
 
 export default ProfileScreen;

@@ -14,7 +14,7 @@ const WhatsHappening = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   if (!currentUser) {
-    navigate("/login");
+    navigate("/tuiter/login");
     return null;
   }
 
@@ -72,38 +72,40 @@ const WhatsHappening = () => {
             <li key={restaurant._id}>
               {restaurant.name} ({restaurant.restaurantType})
 
-              <div>
-                <input
-                  type="number"
-                  min="1"
-                  max="5"
-                  value={whatsHappening[restaurant._id]?.rating || ''}
-                  placeholder="Rating (1-5)"
-                  className="form-control border-0 mt-2"
-                  onChange={(event) => setWhatsHappening({
-                    ...whatsHappening,
-                    [restaurant._id]: {
-                      ...whatsHappening[restaurant._id],
-                      rating: event.target.value
-                    }
-                  })}
-                />
-                <textarea
-                  value={whatsHappening[restaurant._id]?.comment || ''}
-                  placeholder="Comment"
-                  className="form-control border-0 mt-2"
-                  onChange={(event) => setWhatsHappening({
-                    ...whatsHappening,
-                    [restaurant._id]: {
-                      ...whatsHappening[restaurant._id],
-                      comment: event.target.value
-                    }
-                  })}>
-                </textarea>
-                <button onClick={() => rateClickHandler(restaurant)}>
-                  Rate
-                </button>
-              </div>
+              {currentUser.type === "customer" && (  // Check if the user type is "customer"
+                <div>
+                  <input
+                    type="number"
+                    min="1"
+                    max="5"
+                    value={whatsHappening[restaurant._id]?.rating || ''}
+                    placeholder="Rating (1-5)"
+                    className="form-control border-0 mt-2"
+                    onChange={(event) => setWhatsHappening({
+                      ...whatsHappening,
+                      [restaurant._id]: {
+                        ...whatsHappening[restaurant._id],
+                        rating: event.target.value
+                      }
+                    })}
+                  />
+                  <textarea
+                    value={whatsHappening[restaurant._id]?.comment || ''}
+                    placeholder="Comment"
+                    className="form-control border-0 mt-2"
+                    onChange={(event) => setWhatsHappening({
+                      ...whatsHappening,
+                      [restaurant._id]: {
+                        ...whatsHappening[restaurant._id],
+                        comment: event.target.value
+                      }
+                    })}>
+                  </textarea>
+                  <button onClick={() => rateClickHandler(restaurant)}>
+                    Rate
+                  </button>
+                </div>
+              )}
             </li>
           ))
         )}
