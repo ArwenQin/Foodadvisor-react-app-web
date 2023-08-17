@@ -32,3 +32,15 @@ export const searchTuitsThunk = createAsyncThunk(
     "tuits/searchTuits",
     async (query) => await service.searchTuits(query)
 );
+export const fetchUserRatingsThunk = createAsyncThunk(
+    "tuits/fetchUserRatings",
+    async (userId) => await service.fetchUserRatings(userId)
+);
+
+export const rateRestaurantThunk = createAsyncThunk(
+    'tuits/rateRestaurant',
+    async (ratingData) => {
+        const result = await service.rateRestaurant(ratingData);
+        return result;
+    }
+);
