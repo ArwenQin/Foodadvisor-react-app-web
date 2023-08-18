@@ -1,42 +1,29 @@
 import React from "react";
-import TuitSummaryList from "../tuit-summary-list";
+import ResSummaryList from "../all-res-summary-list";
 import { AiOutlineSearch } from "react-icons/ai";
 import { GoGear } from "react-icons/go";
 import "./index.css";
+import FiveStarList from "../all-res-summary-list/five-star-list";
+import {BsStars} from "react-icons/bs";
+import {MdDinnerDining} from "react-icons/md";
+
 
 function ExploreScreen() {
   return (
   <>
-    <div className="row">
-      <div className="col-11 position-relative">
-        <input placeholder="Search Tuiter"
-               className="form-control rounded-pill ps-5"/>
-        <AiOutlineSearch className="fs-3 position-absolute
-                       wd-nudge-up"/>
-      </div>
-      <div className="col-1">
-        <GoGear className="wd-top-4 float-end
-                       fs-3 position-relative"/>
-      </div>
-    </div>
-    <ul className="nav nav-pills mb-2 mt-2">
-      <li className="nav-item">
-        <a className="nav-link active">For You</a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link">Trending</a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link">News</a>
-      </li>
-    </ul>
-    <div className="position-relative mb-2">
-      <img src="https://techcrunch.com/wp-content/uploads/2019/09/Starship-Mk1-Day.jpg" className="w-100"/>
-      <h1 className="position-absolute wd-nudge-up text-white">
-        SpaceX Starship</h1>
-    </div>
 
-  <TuitSummaryList/>
+    <div className="position-relative mb-2">
+      <img
+          src="https://egluu.com/wp-content/uploads/2014/02/tripadvisor.jpg"
+           className="w-100 "/>
+      <h1 className="position-absolute wd-nudge-up text-white">
+        Explore All Restaurants & More !</h1>
+    </div>
+    <h3 style={{color:'orange'}}>Check Out Our Five Start Restaurants <BsStars/><BsStars/><BsStars/><BsStars/><BsStars/></h3>
+<FiveStarList/>
+    <p></p>
+    <h3 style={{color:'orange'}}>Check Out All Amazing Restaurants <MdDinnerDining/></h3>
+  <ResSummaryList/>
   </>
   )}
 export default ExploreScreen;

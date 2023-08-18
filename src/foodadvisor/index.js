@@ -21,10 +21,9 @@ import exploresReducer from "./reducers/explore-reducer";
 import tuitsReducer from "./reducers/tuits-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import {Provider} from "react-redux";
-import exploreReducer from "./reducers/explore-reducer";
-
+import restaurantReducer from "./reducers/restaurant-reducer";
 const store = configureStore(
-    {reducer: { tuits: tuitsReducer, user:  authReducer, explores: exploresReducer
+    {reducer: { tuits: tuitsReducer, user:  authReducer, explores: exploresReducer,restaurant:restaurantReducer
       }});
 
 

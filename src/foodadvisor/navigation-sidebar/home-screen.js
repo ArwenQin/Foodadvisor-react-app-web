@@ -1,18 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import RatingsList from "../tuits-list";
 
 import "./index.css";
 import WhatsHappening from "./whats-happening";
-
-
+import PublishRes from "./publish-res";
 
 function HomeScreen() {
-  return(
-  <>
+  const currentUser = useSelector((state) => state.user.currentUser);
 
-  <h4>Home</h4>
-    <WhatsHappening/>
-  <RatingsList/>
-  </>)
+  return (
+    <>
+      <h4>Home</h4>
+      {currentUser ? (currentUser.type === "owner" ? <PublishRes /> : <WhatsHappening />) : null}
+      <RatingsList />
+    </>
+  );
 }
+
 export default HomeScreen;

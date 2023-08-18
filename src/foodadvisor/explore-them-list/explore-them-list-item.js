@@ -7,6 +7,7 @@ import {GrScorecard} from "react-icons/gr";
 import {MdOutlineFastfood} from "react-icons/md";
 import { useNavigate } from "react-router";
 import {BsHearts} from "react-icons/bs";
+import {findResByNameThunk} from "../services/restaurant-thunks";
 
 const ExploreThemListItem = (
     {
@@ -25,8 +26,9 @@ const ExploreThemListItem = (
   }
 
 
-  const handleExploreClick = () => {
-    navigate('/tuiter/explore');// to be corrected later
+  const handleExploreClick = async () => {
+    await dispatch(findResByNameThunk(res.name));
+    navigate('/tuiter/more');
   };
 
   return(
