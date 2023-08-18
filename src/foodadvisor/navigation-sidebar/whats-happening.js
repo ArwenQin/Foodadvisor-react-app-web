@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { rateRestaurantThunk, searchTuitsThunk } from "../services/tuits-thunks";
+import { searchRestaurantsThunk } from "../services/restaurant-thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { FaSearch } from "react-icons/fa";
@@ -44,10 +45,8 @@ const WhatsHappening = () => {
       restaurantType: restaurant.restaurantType
     }
 
-    // Use the new thunk here
     dispatch(rateRestaurantThunk(newRating));
 
-    // Clear the respective rating and comment
     setWhatsHappening(prev => {
       const updatedState = { ...prev };
       delete updatedState[restaurant._id];
@@ -87,7 +86,7 @@ const WhatsHappening = () => {
         ) : (
           searchResults.map(restaurant => (
             <li key={restaurant._id}>
-              {restaurant.name} ({restaurant.restaurantType})
+              {restaurant.name} ({restaurant.cuisine})
 
               {currentUser.type === "customer" && (
                 <div>

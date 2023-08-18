@@ -38,3 +38,7 @@ export const findResByNameThunk = createAsyncThunk(
     "restaurants/findResByName",
     async (name) => await service.findResByName(name)
 );
+export const searchRestaurantsThunk = createAsyncThunk(
+    "restaurants/searchRestaurants",
+    async (query) => await service.searchRestaurants(query)
+);
