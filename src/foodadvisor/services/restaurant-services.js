@@ -31,7 +31,7 @@ export const deleteRestaurant = async (rid) => {
 export const updateRestaurant = async (res) => {
     const response = await axios
         .put(`${RESTAURANTS_API}/${res._id}`, res);
-    return res;
+    return response.data;
 }
 export const searchRestaurants = async (query) => {
     const response = await axios.get(`${RESTAURANTS_API}/search`, { params: { q: query } });
