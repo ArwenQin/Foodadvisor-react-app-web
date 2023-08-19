@@ -30,3 +30,9 @@ export const register = async ({ username, password,type }) => {
   const user = response.data;
   return user;
 };
+
+export const findUserById = async (uid) => {
+  const response = await axios.get(`${USERS_URL}/${uid}`);
+  const res = response.data;
+  return res;
+}

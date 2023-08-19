@@ -43,11 +43,18 @@ const WhatsHappening = () => {
     const ratingData = whatsHappening[restaurant._id] || {};
     const newRating = {
       userId: currentUser._id,
+      username: currentUser.username,
+      image:currentUser.image,
       restaurantId: restaurant._id,
       name: restaurant.name,
       rating: ratingData.rating,
       comment: ratingData.comment,
-      restaurantType: restaurant.restaurantType
+      restaurantType: restaurant.cuisine,
+      likes:0,
+      dislikes:0,
+      disliked:false,
+      liked:false
+
     }
   
     const response = await dispatch(rateRestaurantThunk(newRating));

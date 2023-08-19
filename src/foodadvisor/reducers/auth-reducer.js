@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  findUserByIdThunk,
   loginThunk, logoutThunk, profileThunk,
   registerThunk,
   updateUserThunk
 } from "../services/auth-thunks";
+import {findResByNameThunk} from "../services/restaurant-thunks";
 
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: { currentUser: null },
+  initialState: { currentUser: null,
+  visitingUser: null},
   reducers: {},
   extraReducers: {
     [loginThunk.fulfilled]: (state, { payload }) => {
@@ -41,7 +44,21 @@ const authSlice = createSlice({
     [updateUserThunk.fulfilled]: (state, { payload }) => {
       state.currentUser = payload;
     },
-
+    [findUserByIdThunk.pending]:
+        (state) => {
+          state.loading = true
+          state.visitingUser = null
+        },
+    [findUserByIdThunk.fulfilled]:
+        (state, { payload }) => {
+          state.loading = false
+          state.visitingUser = payload
+        },
+    [findUserByIdThunk.rejected]:
+        (state, action) => {
+          state.loading = false
+          state.error = action.error
+        }
   },
 });
 export default authSlice.reducer;
