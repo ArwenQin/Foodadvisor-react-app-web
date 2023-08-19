@@ -23,7 +23,12 @@ const RatingItem = ({ tuit }) => {
   const deleteTuitHandler = (id) => {
     dispatch(deleteTuitThunk(id));
   }
-
+  const renderStars = (rating) => {
+    if (Number.isInteger(rating) && rating > 0 && rating <= 5) {
+      return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    }
+    return 'Invalid rating';
+  };
   return (
     <li className="list-group-item">
       <div className="row">
@@ -37,7 +42,7 @@ const RatingItem = ({ tuit }) => {
               {currentUser  && currentUser.type === 'admin' && <RxCross1 size={14} onClick={() => deleteTuitHandler(tuit._id)} />}
             </span>
           </div>
-          <div>Rating: {Number.isInteger(tuit.rating) ? '★'.repeat(tuit.rating) : 'Invalid rating'}</div>
+          <div>Rating: {renderStars(tuit.rating)}</div>
           <div>Comment: {tuit.comment}</div>
           <div>Restaurant: {tuit.name}</div>
 
