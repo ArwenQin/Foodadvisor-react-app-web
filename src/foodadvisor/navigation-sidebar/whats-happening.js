@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { rateRestaurantThunk, searchTuitsThunk } from "../services/tuits-thunks";
-import { searchRestaurantsThunk } from "../services/restaurant-thunks";
+import { findResByNameThunk } from "../services/restaurant-thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { FaSearch } from "react-icons/fa";
@@ -22,19 +22,24 @@ const WhatsHappening = () => {
 
   const handleSearch = async () => {
     try {
-      const results = await dispatch(searchTuitsThunk(searchTerm));
-      setSearchResults(results.payload);
+      const result = await dispatch(findResByNameThunk(searchTerm));
+      if (result.payload) {
+        setSearchResults([result.payload]);
+      } else {
+        setSearchResults([]);
+      }
     } catch (error) {
       console.error("Failed to fetch search results: ", error.message);
     }
   };
+  
 
-  const rateClickHandler = (restaurant) => {
+  const rateClickHandler = async (restaurant) => {
     if (!restaurant.name) {
       alert("Please select a valid restaurant from the search results before rating.");
       return;
     }
-
+  
     const ratingData = whatsHappening[restaurant._id] || {};
     const newRating = {
       userId: currentUser._id,
@@ -44,15 +49,20 @@ const WhatsHappening = () => {
       comment: ratingData.comment,
       restaurantType: restaurant.restaurantType
     }
-
-    dispatch(rateRestaurantThunk(newRating));
-
-    setWhatsHappening(prev => {
-      const updatedState = { ...prev };
-      delete updatedState[restaurant._id];
-      return updatedState;
-    });
+  
+    const response = await dispatch(rateRestaurantThunk(newRating));
+  /*
+    if (response && response.type === 'YOUR_SUCCESS_ACTION_TYPE') {
+      setWhatsHappening(prev => {
+        const updatedState = { ...prev };
+        delete updatedState[restaurant._id];
+        return updatedState;
+      });
+    } else {
+      alert('Failed to rate the restaurant. Please try again.');
+    }*/
   }
+  
 
   return (
     <div className="row whatsHappening-container">
