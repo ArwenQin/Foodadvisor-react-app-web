@@ -12,7 +12,7 @@ function HomeScreen() {
   return (
     <>
       <h4>Home</h4>
-      {currentUser ? (currentUser.type === "owner" ? <PublishRes /> : <WhatsHappening />) : null}
+      {currentUser ? (currentUser.type === "owner" ? null : <WhatsHappening />) : null}
       <RatingsList />
     </>
   );

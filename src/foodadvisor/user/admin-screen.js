@@ -16,7 +16,7 @@ function AdminScreen() {
   const navigate = useNavigate();
   const save = async () => { try {
     await dispatch(createExploreThunk(profile));
-
+    alert('Successfully saved!')
   } catch (e) {
     alert(e);
   }

@@ -31,7 +31,7 @@ function ExploreScreen() {
       </div>
 
       <RestaurantSearch 
-        onSearchResults={handleSearchResults} 
+        //onSearchResults={handleSearchResults} 
         onRestaurantSelect={handleRestaurantSelect}
       />
 

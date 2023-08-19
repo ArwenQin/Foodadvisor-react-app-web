@@ -22,6 +22,7 @@ export const registerThunk = createAsyncThunk(
       try{
       const user = await authService.register(userData);
         console.log("Successfully registered");
+        
       return user;}
       catch (error){
         alert("Username already exists");
