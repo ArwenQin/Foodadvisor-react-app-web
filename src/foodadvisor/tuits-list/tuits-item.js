@@ -5,12 +5,21 @@ import "./index.css";
 import { BsFillPatchCheckFill, BsDot } from 'react-icons/bs';
 import { deleteTuitThunk } from "../services/tuits-thunks";
 import { RxCross1 } from "react-icons/rx";
-
+import {PiBowlFoodDuotone} from "react-icons/pi";
+import {findResByNameThunk} from "../services/restaurant-thunks";
+import {useNavigate} from "react-router";
+import {findUserByIdThunk} from "../services/auth-thunks";
 const RatingItem = ({ tuit }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.user.currentUser);
   const name = currentUser?.username || "Unknown User";
+  const handleExploreClick = async () => {
 
+    await dispatch(findUserByIdThunk(tuit.userId));
+
+    navigate('/tuiter/users');
+  };
   const deleteTuitHandler = (id) => {
     dispatch(deleteTuitThunk(id));
   }
@@ -23,16 +32,16 @@ const RatingItem = ({ tuit }) => {
         </div>
         <div className="col-xxl-10 col-xl-10 col-lg-12">
           <div>
-            <b>{tuit.username}</b> <BsFillPatchCheckFill size={16} color="blue" /> {tuit.handle}<BsDot size={12} />{tuit.time}
+            <b>{tuit.name}</b> <PiBowlFoodDuotone size={16} color="orange" /> {tuit.handle}<BsDot size={12} />{tuit.restaurantType}
             <span className="wd-delete-icon">
-              <RxCross1 size={14} onClick={() => deleteTuitHandler(tuit._id)} />
+              {currentUser  && currentUser.type === 'admin' && <RxCross1 size={14} onClick={() => deleteTuitHandler(tuit._id)} />}
             </span>
           </div>
           <div>Rating: {Number.isInteger(tuit.rating) ? '★'.repeat(tuit.rating) : 'Invalid rating'}</div>
           <div>Comment: {tuit.comment}</div>
           <div>Restaurant: {tuit.name}</div>
-          <div>Type: {tuit.restaurantType}</div>
-          <div>Name: {name}</div>
+
+          <div>User Name: <span onClick={handleExploreClick} style={{  textDecoration: 'underline' }}>{tuit.username}</span></div>
           <div><TuitStats tuit={tuit} /></div>
         </div>
       </div>

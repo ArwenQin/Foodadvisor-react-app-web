@@ -19,7 +19,7 @@ const NavigationSidebar = () => {
     { icon: <AiOutlineBell/>, text: "notifications" },
     { icon: <BsEnvelope/>, text: "messages" },
     { icon: <BsBookmark/>, text: "bookmarks" },
-    { icon: <LiaListSolid/>, text: "lists" },
+    { icon: <LiaListSolid/>, text: "Users" },
     { icon: <CiCircleMore/>, text: "more" }
   ]
   return (

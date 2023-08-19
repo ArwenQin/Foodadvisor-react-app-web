@@ -6,7 +6,7 @@ import ExploreScreen from "./navigation-sidebar/explore-screen";
 import BookmarksScreen from "./navigation-sidebar/bookmarks-screen";
 import ExploreThemList  from "./explore-them-list";
 //import ProfileScreen from "./navigation-sidebar/profile-screen";
-import ListsScreen from "./navigation-sidebar/lists-screen";
+import UsersScreen from "./navigation-sidebar/users-screen";
 import MessagesScreen from "./navigation-sidebar/messages-screen";
 import MoreScreen from "./navigation-sidebar/more-screen";
 import NotificationsScreen from "./navigation-sidebar/notifications-screen";
@@ -42,7 +42,7 @@ function Tuiter() {
               <Route path="/explore" element={<ExploreScreen />} />
               <Route path="/bookmarks" element={<BookmarksScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />
-              <Route path="/lists" element={<ListsScreen />} />
+              <Route path="/users" element={<UsersScreen />} />
               <Route path="/messages" element={<MessagesScreen />} />
               <Route path="/more" element={<MoreScreen />} />
               <Route path="/notifications" element={<NotificationsScreen />} />

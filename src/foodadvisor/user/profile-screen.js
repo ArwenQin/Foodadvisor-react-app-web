@@ -65,6 +65,51 @@ function ProfileScreen() {
               }}
             />
           </div>
+
+          <div>
+            <label>Image for Yourself</label>
+            <input
+                type="text"
+                value={profile.image}
+                onChange={(event) => {
+                  const newProfile = {
+                    ...profile,
+                    image: event.target.value,
+                  };
+                  setProfile(newProfile);
+                }}
+            />
+          </div>
+
+          <div>
+            <label>Something Cool About You</label>
+            <input
+                type="text"
+                value={profile.intro}
+                onChange={(event) => {
+                  const newProfile = {
+                    ...profile,
+                    intro: event.target.value,
+                  };
+                  setProfile(newProfile);
+                }}
+            />
+          </div>
+
+          <div>
+            <label>Details</label>
+            <input
+                type="text"
+                value={profile.details}
+                onChange={(event) => {
+                  const newProfile = {
+                    ...profile,
+                    details: event.target.value,
+                  };
+                  setProfile(newProfile);
+                }}
+            />
+          </div>
           <div>
             <label>User Type: </label>
             <span> {profile.type}</span>

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as authService from "./auth-service";
+import * as service from "./restaurant-services";
 
 
 export const loginThunk = createAsyncThunk(
@@ -45,3 +46,7 @@ export const updateUserThunk = createAsyncThunk(
       console.log("Successfully updated user information",user);
       return user;
     });
+export const findUserByIdThunk = createAsyncThunk(
+    "users/findUserById",
+    async (uid) => await authService.findUserById(uid)
+);
