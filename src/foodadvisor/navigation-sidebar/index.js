@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import {AiFillHome,AiOutlineBell} from "react-icons/ai";
+import {AiFillHome, AiOutlineCloudUpload} from "react-icons/ai";
 import {BsHash,BsEnvelope,BsBookmark,BsPerson} from "react-icons/bs";
 import {LiaListSolid} from "react-icons/lia";
 import {CiCircleMore, CiLogin} from "react-icons/ci";
@@ -16,7 +16,6 @@ const NavigationSidebar = () => {
   const [ignore, tuiter, active] = pathname.split("/");
   const links = [{ icon: <AiFillHome />, text: "home" },
     { icon: <BsHash/>, text: "explore" },
-    { icon: <AiOutlineBell/>, text: "notifications" },
     { icon: <BsEnvelope/>, text: "messages" },
     { icon: <BsBookmark/>, text: "bookmarks" },
     { icon: <LiaListSolid/>, text: "Users" },
@@ -42,6 +41,15 @@ const NavigationSidebar = () => {
                 <Link className={`list-group-item text-capitalize ${active === 'admin' ? 'active' : ''}`}
                       style={active === 'admin' ? { backgroundColor: "orange" } : null}to="/tuiter/admin">
                   <RiAdminLine/> <span className="d-none d-xl-inline">Admin</span>
+                </Link>
+            ) : null
+        ) : null}
+
+        {currentUser !== null ? (
+            currentUser.type === 'owner' ? (
+                <Link className={`list-group-item text-capitalize ${active === 'upload' ? 'active' : ''}`}
+                      style={active === 'upload' ? { backgroundColor: "orange" } : null}to="/tuiter/upload">
+                  <AiOutlineCloudUpload/> <span className="d-none d-xl-inline">Upload</span>
                 </Link>
             ) : null
         ) : null}

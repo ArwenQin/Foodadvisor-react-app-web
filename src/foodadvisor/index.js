@@ -9,7 +9,7 @@ import ExploreThemList  from "./explore-them-list";
 import UsersScreen from "./navigation-sidebar/users-screen";
 import MessagesScreen from "./navigation-sidebar/messages-screen";
 import MoreScreen from "./navigation-sidebar/more-screen";
-import NotificationsScreen from "./navigation-sidebar/notifications-screen";
+import UploadScreen from "./navigation-sidebar/upload-screen";
 import AdminScreen  from "./user/admin-screen";
 
 import ProfileScreen from "./user/profile-screen";
@@ -45,7 +45,7 @@ function Tuiter() {
               <Route path="/users" element={<UsersScreen />} />
               <Route path="/messages" element={<MessagesScreen />} />
               <Route path="/more" element={<MoreScreen />} />
-              <Route path="/notifications" element={<NotificationsScreen />} />
+              <Route path="/upload" element={<UploadScreen />} />
               <Route path="/login"    element={<LoginScreen    />} />
               <Route path="/register" element={<RegisterScreen />} />
               <Route path="/admin" element={<AdminScreen/>} />

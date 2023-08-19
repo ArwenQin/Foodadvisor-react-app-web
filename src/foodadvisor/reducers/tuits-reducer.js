@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { updateTuitThunk, createTuitThunk, deleteTuitThunk, findTuitsThunk, searchTuitsThunk,rateRestaurantThunk } from "../services/tuits-thunks";
+import { updateTuitThunk, createTuitThunk, deleteTuitThunk, findTuitsThunk, searchTuitsThunk,rateRestaurantThunk,fetchUserRatingsThunk } from "../services/tuits-thunks";
 const initialState = {
   tuits: [],
   searchResults: [],
@@ -78,7 +78,19 @@ const tuitsSlice = createSlice({
   [rateRestaurantThunk.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error;
-  }
+  },
+  [fetchUserRatingsThunk.pending]: (state) => {
+    state.loading = true;
+},
+[fetchUserRatingsThunk.fulfilled]: (state, { payload }) => {
+    state.loading = false;
+    state.userTuits = payload;
+},
+[fetchUserRatingsThunk.rejected]: (state, action) => {
+    state.loading = false;
+    state.error = action.error;
+}
+
   
 
   },

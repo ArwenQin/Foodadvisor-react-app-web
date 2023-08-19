@@ -1,132 +1,138 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { profileThunk, logoutThunk, updateUserThunk }
-  from "../services/auth-thunks";
+import { profileThunk, logoutThunk, updateUserThunk } from "../services/auth-thunks";
+
 function ProfileScreen() {
-  const { currentUser } = useSelector((state) => state.user);
+    const { currentUser } = useSelector((state) => state.user);
+    console.log("currentUser", currentUser);
+    const [profile, setProfile] = useState(currentUser);
 
-  const [profile, setProfile] = useState(currentUser);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const save = async () => {
-    try {
-      await dispatch(updateUserThunk(profile));
-
-    } catch (e) {
-      alert(e);
-    }
-  };
-
-  useEffect(() => {
-    const loadProfile = async () => {
-      try {
-        const { payload } = await dispatch(profileThunk());
-        setProfile(payload);
-      } catch (e) {
-        alert(e);
-      }
+    const save = async () => {
+        try {
+            await dispatch(updateUserThunk(profile));
+            alert('Successfully saved!');
+        } catch (e) {
+            alert(e);
+        }
     };
-    loadProfile();
-  }, [dispatch]);
 
+    const handleLogout = async () => {
+        try {
+            await dispatch(logoutThunk());
+            navigate("/tuiter/login");
+        } catch (e) {
+            alert("Error logging out. Please try again.");
+        }
+    };
 
-  return (
-    <div>
-      <h1>Profile Screen</h1>
-      {profile && (
+    useEffect(() => {
+        const loadProfile = async () => {
+            try {
+                const { payload } = await dispatch(profileThunk());
+                setProfile(payload);
+            } catch (e) {
+                alert(e);
+            }
+        };
+        loadProfile();
+    }, [dispatch]);
+
+    return (
         <div>
-          <div>
-            <label>First Name</label>
-            <input
-              type="text"
-              value={profile.firstName}
-              onChange={(event) => {
-                const newProfile = {
-                  ...profile,
-                  firstName: event.target.value,
-                };
-                setProfile(newProfile);
-              }}
-            />
-          </div>
-          <div>
-            <label>Last Name</label>
-            <input
-              type="text"
-              value={profile.lastName}
-              onChange={(event) => {
-                const newProfile = {
-                  ...profile,
-                  lastName: event.target.value,
-                };
-                setProfile(newProfile);
-              }}
-            />
-          </div>
-
-          <div>
-            <label>Image for Yourself</label>
-            <input
-                type="text"
-                value={profile.image}
-                onChange={(event) => {
-                  const newProfile = {
-                    ...profile,
-                    image: event.target.value,
-                  };
-                  setProfile(newProfile);
-                }}
-            />
-          </div>
-
-          <div>
-            <label>Something Cool About You</label>
-            <input
-                type="text"
-                value={profile.intro}
-                onChange={(event) => {
-                  const newProfile = {
-                    ...profile,
-                    intro: event.target.value,
-                  };
-                  setProfile(newProfile);
-                }}
-            />
-          </div>
-
-          <div>
-            <label>Details</label>
-            <input
-                type="text"
-                value={profile.details}
-                onChange={(event) => {
-                  const newProfile = {
-                    ...profile,
-                    details: event.target.value,
-                  };
-                  setProfile(newProfile);
-                }}
-            />
-          </div>
-          <div>
-            <label>User Type: </label>
-            <span> {profile.type}</span>
-          </div>
+            <h1>Profile Screen</h1>
+            {profile && (
+                <div>
+                    <div>
+                        <label>First Name&nbsp;</label>
+                        <input
+                            type="text"
+                            value={profile.firstName}
+                            onChange={(event) => {
+                                const newProfile = {
+                                    ...profile,
+                                    firstName: event.target.value,
+                                };
+                                setProfile(newProfile);
+                            }}
+                        />
+                    </div>
+                    <p></p>
+                    <div>
+                        <label>Last Name&nbsp;</label>
+                        <input
+                            type="text"
+                            value={profile.lastName}
+                            onChange={(event) => {
+                                const newProfile = {
+                                    ...profile,
+                                    lastName: event.target.value,
+                                };
+                                setProfile(newProfile);
+                            }}
+                        />
+                    </div>
+                    <p></p>
+                    <div>
+                        <label>Image for Yourself&nbsp;</label>
+                        <input
+                            type="text"
+                            value={profile.image}
+                            onChange={(event) => {
+                                const newProfile = {
+                                    ...profile,
+                                    image: event.target.value,
+                                };
+                                setProfile(newProfile);
+                            }}
+                        />
+                    </div>
+                    <p></p>
+                    <div>
+                        <label>Something Cool About You&nbsp;</label>
+                        <textarea
+                            type="text"
+                            value={profile.intro}
+                            onChange={(event) => {
+                                const newProfile = {
+                                    ...profile,
+                                    intro: event.target.value,
+                                };
+                                setProfile(newProfile);
+                            }}
+                            style={{ width: '100%' }}
+                        />
+                    </div>
+                    <p></p>
+                    <div>
+                        <label>Details&nbsp;</label>
+                        <textarea
+                            type="text"
+                            value={profile.details}
+                            onChange={(event) => {
+                                const newProfile = {
+                                    ...profile,
+                                    details: event.target.value,
+                                };
+                                setProfile(newProfile);
+                            }}
+                            style={{ width: '100%' }}
+                        />
+                    </div>
+                    <p></p>
+                    <div>
+                        <label>User Type: </label>
+                        <span> {profile.type}</span>
+                    </div>
+                </div>
+            )}
+            <button onClick={handleLogout}>Logout</button>
+            <button onClick={save}>Save</button>
         </div>
-      )}
-      <button
-        onClick={() => {
-          dispatch(logoutThunk());
-          navigate("../login");
-        }}>
-        Logout
-      </button>
-      <button onClick={save}>Save</button>
-    </div>
-  );
+    );
 }
 
 export default ProfileScreen;
-
