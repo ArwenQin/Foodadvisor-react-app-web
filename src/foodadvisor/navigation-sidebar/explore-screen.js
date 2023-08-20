@@ -15,7 +15,7 @@ function ExploreScreen() {
   };
 
   const handleRestaurantSelect = (restaurant) => {
-    navigate(`/tuiter/more`);
+    navigate(`/foodadvisor/more`);
   };
 
   return (
@@ -29,22 +29,13 @@ function ExploreScreen() {
           Explore All Restaurants & More!
         </h1>
       </div>
-
-      <RestaurantSearch 
-        //onSearchResults={handleSearchResults} 
+<div>
+      <RestaurantSearch
         onRestaurantSelect={handleRestaurantSelect}
       />
+</div>
 
-      {searchResults.length > 0 && (
-        <ul className="restaurant-list">
-          {searchResults.map(restaurant => (
-            <li key={restaurant._id}>
-              {restaurant.name} ({restaurant.cuisine})
-            </li>
-          ))}
-        </ul>
-      )}
-
+<p></p>
       <h3 style={{color:'orange'}}>
         Check Out Our Five Start Restaurants 
         <BsStars/><BsStars/><BsStars/><BsStars/><BsStars/>

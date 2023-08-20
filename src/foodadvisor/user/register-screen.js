@@ -16,7 +16,7 @@ function RegisterScreen() {
     } catch (e) {
       alert(e);
     }
-    navigate('/tuiter/login');
+    navigate('/foodadvisor/login');
   };
 
 

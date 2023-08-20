@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { addNewRestaurantThunk } from "../services/restaurant-thunks";
+import { addNewRestaurantThunk,findResByNameThunk } from "../services/restaurant-thunks";
 
 const PublishRes = () => {
     const [restaurantInfo, setRestaurantInfo] = useState({});
@@ -12,14 +12,45 @@ const PublishRes = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
 
     if (!currentUser) {
-        navigate("/tuiter/login");
+        navigate("/foodadvisor/login");
         return null;
     }
 
-    const handlePublishRestaurant = () => {
-        dispatch(addNewRestaurantThunk(restaurantInfo));
-        alert('Successfully Uploaded!')
-    };
+    const handlePublishRestaurant = async () => {
+
+        if(!restaurantInfo||!restaurantInfo.name){
+            alert('Please enter a restaurant name')
+            return null;
+        }
+        restaurantInfo.owner=currentUser.username;
+        const checkOwner=await dispatch(findResByNameThunk(restaurantInfo.name));
+        const checkOwnerInfo=checkOwner.payload;
+
+        if(!checkOwnerInfo){
+
+            try{
+                await dispatch(addNewRestaurantThunk(restaurantInfo));}
+            catch(e){
+                alert(e);
+            }
+            alert('New Restaurant Successfully Published!')
+        }
+
+        else{
+        const checkOwnerName=checkOwnerInfo.owner;
+
+        if(checkOwnerName&&(checkOwnerName!==restaurantInfo.owner)){
+            alert('You are not the owner of this restaurant')
+            return null;
+        }
+
+        try{
+        await dispatch(addNewRestaurantThunk(restaurantInfo));}
+        catch(e){
+            alert(e);
+        }
+        alert('Information Successfully Updated!')
+    }};
 
     return (
         <div className="container mt-4">

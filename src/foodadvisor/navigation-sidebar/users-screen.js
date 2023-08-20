@@ -27,7 +27,7 @@ function UsersScreen() {
       fetchData();
     }
   }, [visitingUser, dispatch]);
-  console.log('tuits', userTuits);
+  console.log('rates', userTuits);
 
   return (
     <div>
@@ -59,6 +59,7 @@ function UsersScreen() {
             <BsStars color="yellow" />
             &nbsp;{visitingUser.intro}
           </div>
+          <p></p>
           <div>
             <h4>
               <GiCoolSpices color="yellow" /> Something Cool About This Panda

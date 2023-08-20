@@ -9,6 +9,11 @@ const RestaurantSearch = ({ onSearchResults, onRestaurantSelect }) => {
     const dispatch = useDispatch();
 
     const handleSearch = async () => {
+        if (!searchTerm.trim()) {
+            alert("Please enter a restaurant name to search!");
+            return;
+        }
+
         try {
             const result = await dispatch(findResByNameThunk(searchTerm));
             if (result.payload) {
@@ -25,7 +30,7 @@ const RestaurantSearch = ({ onSearchResults, onRestaurantSelect }) => {
     return (
         <div className="search-section" style={{ display: 'flex', alignItems: 'center' }}>
             <input
-                type="text"
+                type="text" className="form-control "
                 value={searchTerm}
                 placeholder="Search for a restaurant"
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -50,9 +55,9 @@ const RestaurantSearch = ({ onSearchResults, onRestaurantSelect }) => {
                     <li
                         key={restaurant._id}
                         onClick={() => onRestaurantSelect(restaurant)}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer",color: 'orange' }}
                     >
-                        {restaurant.name} ({restaurant.cuisine})
+                      <div style={{ color: 'orange', textDecoration: 'underline' }}>{restaurant.name} ({restaurant.cuisine})</div>
                     </li>
                 ))}
             </ul>

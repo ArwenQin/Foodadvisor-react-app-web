@@ -1,13 +1,14 @@
 import React from "react";
 import "./index.css";
 import {RxCross1} from "react-icons/rx";
-import {deleteExploreThunk} from "../services/explore-thunks";
+import {deleteExploreThunk, updateExploreThunk} from "../services/explore-thunks";
 import {useDispatch, useSelector} from "react-redux";
 import {GrScorecard} from "react-icons/gr";
 import {MdOutlineFastfood} from "react-icons/md";
 import { useNavigate } from "react-router";
-import {BsHearts} from "react-icons/bs";
+import {BsHearts, BsStars} from "react-icons/bs";
 import {findResByNameThunk} from "../services/restaurant-thunks";
+
 
 const ExploreThemListItem = (
     {
@@ -28,7 +29,7 @@ const ExploreThemListItem = (
 
   const handleExploreClick = async () => {
     await dispatch(findResByNameThunk(res.name));
-    navigate('/tuiter/more');
+    navigate('/foodadvisor/more');
   };
 
   return(
@@ -40,7 +41,7 @@ const ExploreThemListItem = (
           <div className="col-8 wd-z-index">
             <div className="fw-bold ">{res.name}</div>
             <div><MdOutlineFastfood/>&nbsp; since&nbsp; {res.year}</div>
-            <div><GrScorecard />&nbsp;{res.score}&nbsp;&nbsp;<BsHearts color={"red"}/>&nbsp;{res.likes}</div>
+            <div><BsStars color={"orange"}/>&nbsp;{res.score}&nbsp;&nbsp;&nbsp;<BsHearts color={"red"}onClick={() => dispatch(updateExploreThunk({ ...res, likes:res.likes+1}))} />&nbsp;{res.likes}</div>
 
           </div>
           <div className="col-2">

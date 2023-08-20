@@ -18,7 +18,7 @@ const RatingItem = ({ tuit }) => {
 
     await dispatch(findUserByIdThunk(tuit.userId));
 
-    navigate('/tuiter/users');
+    navigate('/foodadvisor/users');
   };
   const deleteTuitHandler = (id) => {
     dispatch(deleteTuitThunk(id));

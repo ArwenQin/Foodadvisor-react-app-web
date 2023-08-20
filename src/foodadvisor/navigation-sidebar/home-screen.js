@@ -11,7 +11,8 @@ function HomeScreen() {
 
   return (
     <>
-      <h4>Home</h4>
+      <h4>Welcome To FoodAdvisor</h4>
+      <p></p>
       {currentUser ? (currentUser.type === "owner" ? null : <WhatsHappening />) : null}
       <RatingsList />
     </>

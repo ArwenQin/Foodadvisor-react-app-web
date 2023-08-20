@@ -13,33 +13,31 @@ const NavigationSidebar = () => {
 
 
   const { pathname } = useLocation();
-  const [ignore, tuiter, active] = pathname.split("/");
+  const [ignore, foodadvisor, active] = pathname.split("/");
   const links = [{ icon: <AiFillHome />, text: "home" },
     { icon: <BsHash/>, text: "explore" },
-    { icon: <BsEnvelope/>, text: "messages" },
-    { icon: <BsBookmark/>, text: "bookmarks" },
-    { icon: <LiaListSolid/>, text: "Users" },
+    { icon: <LiaListSolid/>, text: "users" },
     { icon: <CiCircleMore/>, text: "more" }
   ]
   return (
       <div className="list-group">
         {links.map((link) =>
-            <Link to={`/tuiter/${link.text}`} className={`list-group-item text-capitalize ${active === link.text ? "active " : ""}`}
+            <Link to={`/foodadvisor/${link.text}`} className={`list-group-item text-capitalize ${active === link.text ? "active " : ""}`}
                   style={active === link.text ? { backgroundColor: "orange" } : null}>
               {link.icon} &nbsp;<span className="d-none d-xl-inline">{link.text}</span>
             </Link>
 
         )}
         {!currentUser && <Link className={`list-group-item text-capitalize ${active === 'login' ? 'active' : ''}`}
-                               style={active === 'login' ? { backgroundColor: "orange" } : null}to="/tuiter/login">  <CiLogin/> &nbsp;<span className="d-none d-xl-inline">Login </span>  </Link>}
+                               style={active === 'login' ? { backgroundColor: "orange" } : null}to="/foodadvisor/login">  <CiLogin/> &nbsp;<span className="d-none d-xl-inline">Login </span>  </Link>}
         {!currentUser && <Link className={`list-group-item text-capitalize ${active === 'register' ? 'active' : ''}`}
-                               style={active === 'register' ? { backgroundColor: "orange" } : null}to="/tuiter/register"><MdAppRegistration/>&nbsp;<span className="d-none d-xl-inline">Register</span></Link>}
+                               style={active === 'register' ? { backgroundColor: "orange" } : null}to="/foodadvisor/register"><MdAppRegistration/>&nbsp;<span className="d-none d-xl-inline">Register</span></Link>}
         { currentUser && <Link className={`list-group-item text-capitalize ${active === 'profile' ? 'active' : ''}`}
-                               style={active === 'profile' ? { backgroundColor: "orange" } : null}to="/tuiter/profile"><BsPerson/> &nbsp;<span className="d-none d-xl-inline">Profile</span> </Link>}
+                               style={active === 'profile' ? { backgroundColor: "orange" } : null}to="/foodadvisor/profile"><BsPerson/> &nbsp;<span className="d-none d-xl-inline">Profile</span> </Link>}
         {currentUser !== null ? (
             currentUser.type === 'admin' ? (
                 <Link className={`list-group-item text-capitalize ${active === 'admin' ? 'active' : ''}`}
-                      style={active === 'admin' ? { backgroundColor: "orange" } : null}to="/tuiter/admin">
+                      style={active === 'admin' ? { backgroundColor: "orange" } : null}to="/foodadvisor/admin">
                   <RiAdminLine/> <span className="d-none d-xl-inline">Admin</span>
                 </Link>
             ) : null
@@ -48,11 +46,21 @@ const NavigationSidebar = () => {
         {currentUser !== null ? (
             currentUser.type === 'owner' ? (
                 <Link className={`list-group-item text-capitalize ${active === 'upload' ? 'active' : ''}`}
-                      style={active === 'upload' ? { backgroundColor: "orange" } : null}to="/tuiter/upload">
+                      style={active === 'upload' ? { backgroundColor: "orange" } : null}to="/foodadvisor/upload">
                   <AiOutlineCloudUpload/> <span className="d-none d-xl-inline">Upload</span>
                 </Link>
             ) : null
         ) : null}
+
+        <div className="list-group-item">
+          <img
+              src="https://i.pinimg.com/736x/8a/27/30/8a2730a029ab9f7aebb1828cf935a975.jpg"
+              alt="Bottom Image"
+              className="d-block mx-auto"
+              style={{ width: "100%" }}
+          />
+        </div>
+
       </div>
   );
 };

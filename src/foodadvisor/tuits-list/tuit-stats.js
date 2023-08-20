@@ -19,7 +19,7 @@ const TuitStats = ({ tuit }) => {
   const handleExploreClick = async () => {
     await dispatch(findResByNameThunk(currentResName));
 
-    navigate('/tuiter/more');
+    navigate('/foodadvisor/more');
   };
   return(
     <div className="row">
