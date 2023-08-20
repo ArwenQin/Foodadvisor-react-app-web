@@ -22,9 +22,6 @@ function SearchScreen() {
       
       {searchResults.length === 0 ? (
         <div>
-          <h2>
-            No results found. Please search for a tuit.
-          </h2>
         </div>
       ) : (
         <div>
