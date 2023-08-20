@@ -8,6 +8,8 @@ import {LiaListSolid} from "react-icons/lia";
 import {CiCircleMore, CiLogin} from "react-icons/ci";
 import {MdAppRegistration} from "react-icons/md";
 import {RiAdminLine} from "react-icons/ri";
+import { FaSearch } from "react-icons/fa";
+
 const NavigationSidebar = () => {
   const { currentUser } = useSelector((state) => state.user);
 
@@ -17,7 +19,8 @@ const NavigationSidebar = () => {
   const links = [{ icon: <AiFillHome />, text: "home" },
     { icon: <BsHash/>, text: "explore" },
     { icon: <LiaListSolid/>, text: "users" },
-    { icon: <CiCircleMore/>, text: "more" }
+    { icon: <CiCircleMore/>, text: "more" },
+    { icon: <FaSearch />, text: "search" }
   ]
   return (
       <div className="list-group">

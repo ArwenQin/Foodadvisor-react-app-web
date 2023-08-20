@@ -4,13 +4,13 @@ import NavigationSidebar from "./navigation-sidebar";
 import HomeScreen from "./navigation-sidebar/home-screen";
 import ExploreScreen from "./navigation-sidebar/explore-screen";
 
-import ExploreThemList  from "./explore-them-list";
+import ExploreThemList from "./explore-them-list";
 
 import UsersScreen from "./navigation-sidebar/users-screen";
-
+import SearchScreen from "./navigation-sidebar/search-screen";
 import MoreScreen from "./navigation-sidebar/more-screen";
 import UploadScreen from "./navigation-sidebar/upload-screen";
-import AdminScreen  from "./user/admin-screen";
+import AdminScreen from "./user/admin-screen";
 
 import ProfileScreen from "./user/profile-screen";
 import LoginScreen from "./user/login-screen";
@@ -20,18 +20,21 @@ import exploresReducer from "./reducers/explore-reducer";
 
 import tuitsReducer from "./reducers/tuits-reducer";
 import { configureStore } from '@reduxjs/toolkit';
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import restaurantReducer from "./reducers/restaurant-reducer";
 const store = configureStore(
-    {reducer: { tuits: tuitsReducer, user:  authReducer, explores: exploresReducer,restaurant:restaurantReducer
-      }});
+  {
+    reducer: {
+      tuits: tuitsReducer, user: authReducer, explores: exploresReducer, restaurant: restaurantReducer
+    }
+  });
 
 
 function FoodAdvisor() {
   return (
-      <Provider store={store}>
+    <Provider store={store}>
       <div>
-<p></p>
+        <p></p>
         <div className="row">
           <div className="col-xxl-2 col-xl-2 col-lg-1 col-md-2 col-sm-2 col-2">
             <NavigationSidebar />
@@ -43,25 +46,26 @@ function FoodAdvisor() {
 
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/users" element={<UsersScreen />} />
+              <Route path="/search" element={<SearchScreen />} />
 
               <Route path="/more" element={<MoreScreen />} />
               <Route path="/upload" element={<UploadScreen />} />
-              <Route path="/login"    element={<LoginScreen    />} />
+              <Route path="/login" element={<LoginScreen />} />
               <Route path="/register" element={<RegisterScreen />} />
-              <Route path="/admin" element={<AdminScreen/>} />
+              <Route path="/admin" element={<AdminScreen />} />
 
 
             </Routes>
           </div>
           <div className="col-xxl-3 col-xl-3.5 col-lg-4 d-none d-lg-block">
-            <ExploreThemList/>
+            <ExploreThemList />
 
           </div>
         </div>
 
 
       </div>
-      </Provider>
+    </Provider>
   );
 }
 export default FoodAdvisor
