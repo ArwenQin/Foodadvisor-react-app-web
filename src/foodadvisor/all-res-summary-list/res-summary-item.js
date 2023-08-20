@@ -32,7 +32,7 @@ const currentResName=res.name;
   const handleExploreClick = async () => {
     await dispatch(findResByNameThunk(currentResName));
 
-   navigate('/tuiter/more');
+   navigate('/foodadvisor/more');
   };
   const deleteResHandler = (id) => {
     dispatch(deleteRestaurantThunk(id));

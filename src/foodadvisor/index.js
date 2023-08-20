@@ -3,11 +3,11 @@ import { Routes, Route } from "react-router";
 import NavigationSidebar from "./navigation-sidebar";
 import HomeScreen from "./navigation-sidebar/home-screen";
 import ExploreScreen from "./navigation-sidebar/explore-screen";
-import BookmarksScreen from "./navigation-sidebar/bookmarks-screen";
+
 import ExploreThemList  from "./explore-them-list";
-//import ProfileScreen from "./navigation-sidebar/profile-screen";
+
 import UsersScreen from "./navigation-sidebar/users-screen";
-import MessagesScreen from "./navigation-sidebar/messages-screen";
+
 import MoreScreen from "./navigation-sidebar/more-screen";
 import UploadScreen from "./navigation-sidebar/upload-screen";
 import AdminScreen  from "./user/admin-screen";
@@ -27,7 +27,7 @@ const store = configureStore(
       }});
 
 
-function Tuiter() {
+function FoodAdvisor() {
   return (
       <Provider store={store}>
       <div>
@@ -40,10 +40,10 @@ function Tuiter() {
             <Routes>
               <Route path="/home" element={<HomeScreen />} />
               <Route path="/explore" element={<ExploreScreen />} />
-              <Route path="/bookmarks" element={<BookmarksScreen />} />
+
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/users" element={<UsersScreen />} />
-              <Route path="/messages" element={<MessagesScreen />} />
+
               <Route path="/more" element={<MoreScreen />} />
               <Route path="/upload" element={<UploadScreen />} />
               <Route path="/login"    element={<LoginScreen    />} />
@@ -64,5 +64,5 @@ function Tuiter() {
       </Provider>
   );
 }
-export default Tuiter
+export default FoodAdvisor
 

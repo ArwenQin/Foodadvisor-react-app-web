@@ -23,7 +23,7 @@ function ProfileScreen() {
     const handleLogout = async () => {
         try {
             await dispatch(logoutThunk());
-            navigate("/tuiter/login");
+            navigate("/foodadvisor/login");
         } catch (e) {
             alert("Error logging out. Please try again.");
         }
@@ -49,6 +49,7 @@ function ProfileScreen() {
                     <div>
                         <label>First Name&nbsp;</label>
                         <input
+                            className="form-control"
                             type="text"
                             value={profile.firstName}
                             onChange={(event) => {
@@ -64,6 +65,7 @@ function ProfileScreen() {
                     <div>
                         <label>Last Name&nbsp;</label>
                         <input
+                            className="form-control"
                             type="text"
                             value={profile.lastName}
                             onChange={(event) => {
@@ -79,6 +81,7 @@ function ProfileScreen() {
                     <div>
                         <label>Image for Yourself&nbsp;</label>
                         <input
+                            className="form-control"
                             type="text"
                             value={profile.image}
                             onChange={(event) => {
@@ -94,6 +97,7 @@ function ProfileScreen() {
                     <div>
                         <label>Something Cool About You&nbsp;</label>
                         <textarea
+                            className="form-control"
                             type="text"
                             value={profile.intro}
                             onChange={(event) => {
@@ -110,6 +114,7 @@ function ProfileScreen() {
                     <div>
                         <label>Details&nbsp;</label>
                         <textarea
+                            className="form-control"
                             type="text"
                             value={profile.details}
                             onChange={(event) => {
@@ -129,8 +134,8 @@ function ProfileScreen() {
                     </div>
                 </div>
             )}
-            <button onClick={handleLogout}>Logout</button>
-            <button onClick={save}>Save</button>
+            <button className="btn  mt-2" style={{ backgroundColor: "orange", color: "white", fontWeight: 'bold' }} onClick={handleLogout}>Logout</button >&nbsp;&nbsp;&nbsp;&nbsp;
+            <button className="btn  mt-2" style={{ backgroundColor: "orange", color: "white", fontWeight: 'bold' }} onClick={save}>&nbsp;Save&nbsp;</button>
         </div>
     );
 }

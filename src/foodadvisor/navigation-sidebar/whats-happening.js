@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { rateRestaurantThunk, searchTuitsThunk } from "../services/tuits-thunks";
-import { findResByNameThunk } from "../services/restaurant-thunks";
+import { findResByNameThunk,updateRestaurantThunk } from "../services/restaurant-thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { FaSearch } from "react-icons/fa";
@@ -16,11 +16,15 @@ const WhatsHappening = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   if (!currentUser) {
-    navigate("/tuiter/login");
+    navigate("/foodadvisor/login");
     return null;
   }
 
   const handleSearch = async () => {
+    if (!searchTerm.trim()) {
+      alert("Please enter a restaurant name to search!");
+      return;
+  }
     try {
       const result = await dispatch(findResByNameThunk(searchTerm));
       if (result.payload) {
@@ -58,7 +62,13 @@ const WhatsHappening = () => {
     }
   
     const response = await dispatch(rateRestaurantThunk(newRating));
-  /*
+    const newRatingSum = restaurant.ratingsSum + parseFloat(newRating.rating);
+    const newRatingQuantity = restaurant.ratingsQuantity + 1;
+    const newRatingsAverage = newRatingSum / newRatingQuantity;
+
+    await dispatch(updateRestaurantThunk({...restaurant, ratingsSum: newRatingSum, ratingsQuantity: newRatingQuantity,ratingsAverage: newRatingsAverage }));
+
+    /*
     if (response && response.type === 'YOUR_SUCCESS_ACTION_TYPE') {
       setWhatsHappening(prev => {
         const updatedState = { ...prev };
@@ -74,7 +84,7 @@ const WhatsHappening = () => {
   return (
     <div className="row whatsHappening-container">
     <div className="search-section" style={{ display: 'flex', alignItems: 'center' }}>
-      <input
+      <input className="form-control "
         type="text"
         value={searchTerm}
         placeholder="Search for a restaurant"
@@ -102,7 +112,7 @@ const WhatsHappening = () => {
           <li>No restaurants found</li>
         ) : (
           searchResults.map(restaurant => (
-            <li key={restaurant._id}>
+            <li  style={{color:"orange" }}key={restaurant._id}>
               {restaurant.name} ({restaurant.cuisine})
 
               {currentUser.type === "customer" && (
@@ -134,7 +144,7 @@ const WhatsHappening = () => {
                       }
                     })}>
                   </textarea>
-                  <button onClick={() => rateClickHandler(restaurant)}>
+                  <button className="btn  mt-2" style={{ backgroundColor: "orange", color: "white"}}onClick={() => rateClickHandler(restaurant)}>
                     Rate
                   </button>
                 </div>

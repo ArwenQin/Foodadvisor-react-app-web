@@ -28,7 +28,8 @@ function AdminScreen() {
     <h1>Manage Explore-Them-List</h1>
           <div>
             <label>Restaurant Name</label>
-            <input type="text" value={profile.name}
+            <input className="form-control"
+                type="text" value={profile.name}
                    onChange={(event) => {
                      const newProfile = {
                        ...profile, name: event.target.value,
@@ -39,7 +40,9 @@ function AdminScreen() {
           </div>
           <div>
             <label>In Operation Since</label>
-            <input type="text" value={profile.year}
+            <input
+                className="form-control"
+                type="text" value={profile.year}
                    onChange={(event) => {
                      const inputValue = event.target.value;
                      if (/^\d*$/.test(inputValue)) {
@@ -56,7 +59,9 @@ function AdminScreen() {
 
         <div>
           <label>Highlights</label>
-          <input type="text" value={profile.highlights}
+          <input
+              className="form-control"
+              type="text" value={profile.highlights}
                  onChange={(event) => {
                    const newProfile = {
                      ...profile, highlights: event.target.value,
@@ -68,7 +73,9 @@ function AdminScreen() {
 
         <div>
           <label>Likes Won</label>
-          <input type="text" value={profile.likes}
+          <input
+              className="form-control"
+              type="text" value={profile.likes}
                  onChange={(event) => {
                    const inputValue = event.target.value;
                    if (/^\d*$/.test(inputValue)) {
@@ -85,7 +92,9 @@ function AdminScreen() {
 
         <div>
           <label>Stars Won</label>
-          <input type="text" value={profile.score}
+          <input
+              className="form-control"
+              type="text" value={profile.score}
                  onChange={(event) => {
                    const inputValue = event.target.value;
                    if (/^\d*\.?\d*$/.test(inputValue)) {
@@ -102,7 +111,9 @@ function AdminScreen() {
 
         <div>
           <label>Upload The Logo Address</label>
-          <input type="text" value={profile.image}
+          <input
+              className="form-control"
+              type="text" value={profile.image}
                  onChange={(event) => {
                    const newProfile = {
                      ...profile, image: event.target.value,
@@ -112,7 +123,7 @@ function AdminScreen() {
           <p></p>
         </div>
 
-        <button onClick={save}>Save  </button></div>
+        <button className="btn  mt-2" style={{ backgroundColor: "orange", color: "white", fontWeight: 'bold' }} onClick={save}>Save  </button></div>
     )}
 
 

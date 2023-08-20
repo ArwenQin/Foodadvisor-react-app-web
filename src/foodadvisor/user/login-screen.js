@@ -15,7 +15,7 @@ function LoginScreen() {
 
   useEffect(() => {
     if (currentUser) {
-      navigate('/tuiter/profile');
+      navigate('/foodadvisor/profile');
     }
   }, [currentUser, navigate]);
 
