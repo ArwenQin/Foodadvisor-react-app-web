@@ -18,7 +18,7 @@ const TuitSearch = () => {
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) {
-      alert("Please enter a tuit to search for!");
+      alert("Please enter a comment to search for!");
       return;
     }
     localStorage.setItem('searchTerm', searchTerm);
@@ -38,12 +38,12 @@ const TuitSearch = () => {
           type="text"
           className="form-control"
           value={searchTerm}
-          placeholder="Search for a tuit"
+          placeholder="Search for a comment"
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{ marginRight: '10px' }}
         />
         <button className="btn  mt-2" style={{ backgroundColor: "orange", color: "white"}} onClick={handleSearch}>
-          <FaSearch /> Search
+          <FaSearch /> 
         </button>
       </div>
       {searchResults.length > 0 ? (
