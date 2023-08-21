@@ -17,7 +17,7 @@ function SearchScreen() {
 
   return (
     <div>
-      <h1>Tuit Search</h1>
+      <h1>Comment Search</h1>
       <TuitSearch onSearchResults={handleSearchResults} />
       
       {searchResults.length === 0 ? (
