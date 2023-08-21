@@ -36,12 +36,13 @@ const TuitSearch = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <input
           type="text"
+          className="form-control"
           value={searchTerm}
           placeholder="Search for a tuit"
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{ marginRight: '10px' }}
         />
-        <button onClick={handleSearch}>
+        <button className="btn  mt-2" style={{ backgroundColor: "orange", color: "white"}} onClick={handleSearch}>
           <FaSearch /> Search
         </button>
       </div>
@@ -63,7 +64,7 @@ const TuitSearch = () => {
           ))}
         </div>
       ) : (
-        <h2>No results found. Please search for a tuit.</h2>
+        <h2>No results found. Please search for a comment.</h2>
       )}
     </div>
   );
