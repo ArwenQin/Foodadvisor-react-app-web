@@ -42,7 +42,8 @@ const TuitSearch = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           style={{ marginRight: '10px' }}
         />
-        <button className="btn  mt-2" style={{ backgroundColor: "orange", color: "white"}} onClick={handleSearch}>
+        <button className="btn  mt-2" style={{ backgroundColor: "orange", color: "white", display: "flex",
+          alignItems: "center"}} onClick={handleSearch}>
           <FaSearch /> 
         </button>
       </div>
